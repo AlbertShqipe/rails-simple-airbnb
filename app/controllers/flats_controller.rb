@@ -12,18 +12,15 @@ class FlatsController < ApplicationController
   end
 
   def create
-    if @flat.save
-      redirect_to @flat
-    else
-      render :new
-    end
+    @flat = Flat.create(flat_params)
+    redirect_to flat_path(@flat)
   end
 
   def edit; end
 
   def destroy
-      @flat.destroy
-      redirect_to flats_path
+    @flat.destroy
+    redirect_to flats_path, status: :see_other
   end
 
   def update
